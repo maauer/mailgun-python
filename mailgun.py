@@ -9,10 +9,11 @@ import requests
 from requests.auth import HTTPBasicAuth
 
 
-print ("Content-Type: text/html")    # HTML is following
-print()                             # blank line, end of headers
+print ("Content-Type: text/html")
+print()
 
 
+#get vars from apache
 form = cgi.FieldStorage() 
 
 mail_to = form.getvalue('to')
