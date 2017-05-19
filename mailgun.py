@@ -8,8 +8,6 @@ import cgi
 import requests 
 from requests.auth import HTTPBasicAuth
 
-import json
-
 
 print ("Content-Type: text/html")    # HTML is following
 print()                             # blank line, end of headers
@@ -25,17 +23,17 @@ captcha_key = form.getvalue('g-recaptcha-response')
 
 
 #captcha
-cap_url = 'https://www.google.com/recaptcha/api/siteverify'
-cap_postdata = {'secret': '6Lc-CyEUAAAAAHNQMGF52XvXD8yb48L4iodqSOat', 'response': captcha_key}
-captcha_request = requests.post(cap_url, params=cap_postdata)
+captcha_url = 'https://www.google.com/recaptcha/api/siteverify'
+captcha_postdata = {'secret': 'YOUR reCAPTCHA SECRET', 'response': captcha_key}
+captcha_request = requests.post(captcha_url, params=captcha_postdata)
 
-if captcha_request.json()['success'] == True and mail_send_key == 'maauer':
+if captcha_request.json()['success'] == True and mail_send_key == 'CUSTOM KEY':
 	
 	# send mail
-	mail_from = 'maauer mail script <maauer-public-mail-script@public.untrust.output.maauer.com>'
-	url = 'https://api.mailgun.net/v3/output.maauer.com/messages'
+	mail_from = 'mail script <YOUR "FROM" ADDRESS>'
+	url = 'https://api.mailgun.net/v3/YOUR-MAILGUN-DOMAIN/messages'
 	postdata = {'from': mail_from, 'to': mail_to, 'subject': mail_subject, 'text': mail_body, 'html': mail_body} 
-	mail = requests.post(url, params=postdata, auth=HTTPBasicAuth('api', 'key-0ab82a130ef38a16655849f0fb11237d'))
+	mail = requests.post(url, params=postdata, auth=HTTPBasicAuth('api', 'YOUR MAILGUN API KEY'))
 
 elif captcha_request.json()['success'] != True:
 		print ('ERROR - mail not sent - CAPTCHA incorrect <br><br>')
