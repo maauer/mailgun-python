@@ -1,7 +1,7 @@
 This is a python cgi script designed to run under apache.
 
 Requirements:
-- Python 3 (2 will probably work but I don't actually know)
+- [Python 3](https://python.org) (2 will probably work but I don't actually know)
 - [Apache webserver](https://httpd.apache.org/)
 - [Python cgi](https://docs.python.org/3/library/cgi.html) library
 - [Python Requests](http://docs.python-requests.org) library
