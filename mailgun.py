@@ -5,7 +5,7 @@ import cgi
 #import cgitb
 #cgitb.enable()
 
-import requests 
+import requests
 from requests.auth import HTTPBasicAuth
 
 
@@ -14,7 +14,7 @@ print()
 
 
 #get vars from apache
-form = cgi.FieldStorage() 
+form = cgi.FieldStorage()
 
 mail_to = form.getvalue('to')
 mail_subject = form.getvalue('subject')
@@ -29,11 +29,11 @@ captcha_postdata = {'secret': 'YOUR reCAPTCHA SECRET', 'response': captcha_key}
 captcha_request = requests.post(captcha_url, params=captcha_postdata)
 
 if captcha_request.json()['success'] == True and mail_send_key == 'CUSTOM KEY':
-	
+
 	# send mail
 	mail_from = 'mail script <YOUR "FROM" ADDRESS>'
 	url = 'https://api.mailgun.net/v3/YOUR-MAILGUN-DOMAIN/messages'
-	postdata = {'from': mail_from, 'to': mail_to, 'subject': mail_subject, 'text': mail_body, 'html': mail_body} 
+	postdata = {'from': mail_from, 'to': mail_to, 'subject': mail_subject, 'text': mail_body, 'html': mail_body}
 	mail = requests.post(url, params=postdata, auth=HTTPBasicAuth('api', 'YOUR MAILGUN API KEY'))
 
 elif captcha_request.json()['success'] != True:
